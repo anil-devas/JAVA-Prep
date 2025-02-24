@@ -1,4 +1,5 @@
-package myPractice;
+package Assignments;
+
 //Fruits - Apples, Banana, Guava
 //Vegetables - Carrot, Cucumber, Beetroot
 //Frozen Items - Paneer, Cheese, French Fries, Nuggets
@@ -146,12 +147,21 @@ public class GroceryAssignment {
 		iceCreamList.add(new IceCream("Black Current",30.0));
 		iceCreamList.add(new IceCream("Mango",15.0));
 		
-			while(true) {
-			System.out.println("Please select your catagory \n1.Vegetables \n2.Fruits \n3.Frozen Items \n4.Spices \n5.Cosmetics \n6.Ice Creams ");
+		Scanner enteredInput = new Scanner(System.in);			
 
-			Scanner enteredInput = new Scanner(System.in);			
-			int groceryCode = enteredInput.nextInt();
-			
+		while(true) {   
+				System.out.println("\nPlease select your catagory \n1.Vegetables \n2.Fruits \n3.Frozen Items \n4.Spices \n5.Cosmetics \n6.Ice Creams ");
+	
+				int groceryCode = enteredInput.nextInt();
+				 if (groceryCode == 0) {
+		                System.out.println("Exiting...");
+		                break; // Exit the loop
+		         }
+//				 else if (groceryCode <= 6) {
+//		        	 System.out.println("continue");
+//		        	 continue;
+//		         }else {System.out.println("!!!!! Select proper Catagory !!!!!");}
+				 
 			switch (groceryCode) {
 				case 1 -> {
 					System.out.println("Please select your Vegitable");
@@ -163,13 +173,10 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
-					
-					for(int i=0;i<=vegitableList.size();) {
-						totalPrice += quantity*vegitableList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
-				
+					  
+					totalPrice += quantity*vegitableList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
 				}
 				case 2 -> {
 
@@ -182,12 +189,10 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
-					
-					for(int i=0;i<=fruitList.size();i++) {
-						totalPrice += quantity*fruitList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
+					totalPrice += quantity*fruitList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
+
 				}
 				case 3 -> {
 					//Frozen Items - Paneer, Cheese, French Fries, Nuggets
@@ -201,12 +206,11 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
+					totalPrice += quantity*frozenItemsList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
+
 					
-					for(int i=0;i<=frozenItemsList.size();i++) {
-						totalPrice += quantity*frozenItemsList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
 				}
 				case 4 -> {
 					//Spices - Jeera powder, Chicken Masala, Garam Masala
@@ -219,12 +223,11 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
+					totalPrice += quantity*spiceList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
+
 					
-					for(int i=0;i<=spiceList.size();i++) {
-						totalPrice += quantity*spiceList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
 				}
 				case 5 -> {
 					//Cosmetics - SunScreen, Ponds, Nivea, 
@@ -237,12 +240,11 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
+					totalPrice += quantity*cosmeticList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
+
 					
-					for(int i=0;i<=cosmeticList.size();i++) {
-						totalPrice += quantity*cosmeticList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
 				}
 				case 6 -> {
 					//Ice Creams - Butterscotch, Black Current, Mango
@@ -255,17 +257,45 @@ public class GroceryAssignment {
 					int itemCode = enteredInput.nextInt();
 					System.out.println("Enter quantity");
 					int quantity = enteredInput.nextInt();
-					
-					for(int i=0;i<=iceCreamList.size();i++) {
-						totalPrice += quantity*iceCreamList.get(itemCode-1).getPrice();
-						System.out.println("Total Price is "+totalPrice);
-						break;
-					}
-					break;
+					totalPrice += quantity*iceCreamList.get(itemCode-1).getPrice();
+					System.out.println("Total Price is "+totalPrice);
+					System.out.println("\nFor proceed to billing press 0 or continue shopping");
+
 				}
-				
-				
-			}
+			}			
 		}
+		//Total Bill
+		System.out.println("Calculating your Total Bill included taxes..........");
+		double finalPrice = 0.0;
+		double taxes;
+		double taxPercentage=0.01;
+		taxes = totalPrice*taxPercentage;
+		finalPrice = totalPrice + taxes;
+		System.out.println("Your shoping bill included taxes is "+ finalPrice);
+		enteredInput.close();
+		
+		//Payment
+		System.out.println("Please Select your payment method \n1.Cash \n2.Card \n3.UPI");
+		Scanner enteredInput2 = new Scanner(System.in);	
+		
+		String typeOfPay = enteredInput2.next();
+		switch(typeOfPay) {
+		case "Cash" ->{
+			System.out.println("Please give the cash to the Counter");
+		}
+		case "Card" ->{
+			System.out.println("Please Please Enter the card details");
+		}
+		case "UPI" ->{
+			System.out.println("Please Please Scan teh UPI QR Code");
+		}
+		}
+		enteredInput2.close();
+		
+		System.out.println("Payment Successfully done");
+		System.out.println("Thanks for shopping with us");
+		
+		
+			
 }
 }
